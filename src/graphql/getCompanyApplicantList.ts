@@ -166,22 +166,3 @@ export const GET_COMPANY_APPLICANT_LIST = gql`
     __typename
   }
 `;
-
-export type ApplicantListVariables = {
-  page: number;
-  pageSize?: number | null;
-  filter?: {
-    filterParameters: Array<{
-      name: string;
-      operator: string;
-      filterVariable: string;
-      logicalOperator: string;
-    }>;
-    query: string;
-    isFavoriteApplicant: boolean;
-    jobListingId: string | null;
-  } | null;
-  sort?: {
-    createdAt: string;
-  } | null;
-};
