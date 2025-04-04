@@ -58,7 +58,10 @@ export const columns: ColumnDef<ApplicantWithActiveApplication>[] = [
     {
         accessorKey: "activeApplication.stage.name",
         header: "Stage",
-        cell: ({ row }) => <div>{row.original.activeApplication?.stage?.name || "Applied"}</div>,
+        cell: ({ row }) => <div className="flex flex-row items-center gap-2">
+            <div className="h-2 w-2 bg-blue-500 rounded-full" />
+            {row.original.activeApplication?.stage?.name || "Applied"}
+        </div>,
     },
     {
         accessorKey: "activeApplication.aiFit",
