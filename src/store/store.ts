@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import RootReducer from "./rootReducer";
+import { createApolloClient } from "@/graphql/apolloClient";
 
 const persistConfig = {
   key: "root",
@@ -15,6 +16,9 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+      },
+      thunk: {
+        extraArgument: { client: createApolloClient() },
       },
     }),
 });

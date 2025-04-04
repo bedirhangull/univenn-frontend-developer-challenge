@@ -179,7 +179,7 @@ export interface ApplicantListSort {
 
 export interface ApplicantListVariables {
   page: number;
-  pageSize?: number | null;
+  pageSize: number | null;
   filter?: ApplicantListFilter | null;
   sort?: ApplicantListSort | null;
 }
