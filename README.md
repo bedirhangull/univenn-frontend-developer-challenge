@@ -56,15 +56,6 @@ const { data, loading, error } = useApplicants({
   skip: 0,  // offset
 });
 ```
-## Custom Components without shadcn/ui
-
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| ai-input | components/ui/ai-input-with-loading |
-| use-auto-resize-textarea | components/ui/use-auto-resize-textarea |
-| mobile-controller | components/ui/mobile-controller -> for responsive design |
-| pdf-viewer | components/ui/pdf-viewer -> right side sheet component for opening resumes |
-
 ### Core Dependencies
 - **React 19**: The foundation for building reactive, component-based UIs.
 - Vite: Blazing-fast build tool for instant HMR and optimized production bundles.
@@ -86,4 +77,13 @@ const { data, loading, error } = useApplicants({
 - **TypeScript**: Static typing for safer code.
 - **ESLint**: Code quality enforcement with React-specific rules.
 - **Redux Persist**: Session persistence for state hydration across page reloads.
+
+## Custom Components without shadcn/ui
+
+| Component             | Path                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| ai-input | components/ui/ai-input-with-loading |
+| use-auto-resize-textarea | components/ui/use-auto-resize-textarea |
+| mobile-controller | components/ui/mobile-controller -> for responsive design |
+| pdf-viewer | components/ui/pdf-viewer -> right side sheet component for opening resumes |
 
