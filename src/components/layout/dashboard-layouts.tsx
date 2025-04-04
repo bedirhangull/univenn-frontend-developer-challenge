@@ -10,8 +10,13 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { ReactNode } from "react"
+import { useAppSelector } from "@/store/hook"
+import { RootState } from "@/store/store"
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
+
+    const applicants = useAppSelector((state: RootState) => state.applicant);
+
     return (
         <SidebarProvider>
             <AppSidebar />
@@ -25,7 +30,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                                 <div className="flex items-center gap-2">
                                     <h1 className="text-2xl">Talent Pool</h1>
                                     <Badge className="rounded-md bg-muted text-xs">
-                                        <span className="text-xs text-primary">24</span>
+                                        <span className="text-xs text-primary">{applicants.total}</span>
                                     </Badge>
                                 </div>
                                 <p className="text-sm text-muted-foreground">
