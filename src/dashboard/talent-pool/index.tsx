@@ -112,6 +112,21 @@ export default function TalentPool() {
         }
     }, [debouncedSearchValue, table])
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault()
+                setShowAIInput(!showAIInput)
+            }
+            if (e.key === 'Escape') {
+                setShowAIInput(false)
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyDown)
+        return () => document.removeEventListener('keydown', handleKeyDown)
+    }, [])
+
     const resetAllApplicants = () => {
         dispatch(resetApplicants())
         dispatch(setPage(1))
@@ -154,7 +169,7 @@ export default function TalentPool() {
                             variant="outline"
                         >
                             <Sparkle className="h-4 w-4" />
-                            Ask AI
+                            Ask AI (CMD + K)
                         </Button>
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
