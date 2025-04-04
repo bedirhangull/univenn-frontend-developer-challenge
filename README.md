@@ -1,6 +1,6 @@
 
 # Univenn Frontend Developer Challenge
-
+project link: https://univenn-frontend-developer-challenge.vercel.app/dashboard/talent-pool
 Hello, I will talk about the details of their project in this case study I have completed for Univenn. So, first of all, in this document you will learn about: 
 
 - How can I request for this api adress: https://staging-dashboard.hrpanda.co
