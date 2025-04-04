@@ -89,3 +89,9 @@ const { data, loading, error } = useApplicants({
 | mobile-controller | components/ui/mobile-controller -> for responsive design |
 | pdf-viewer | components/ui/pdf-viewer -> right side sheet component for opening resumes |
 
+
+### Features I would like to add for this project in the future: 
+
+- Filter with AI 
+- Display current data from api with a GraphQL query based on column visibility
+
