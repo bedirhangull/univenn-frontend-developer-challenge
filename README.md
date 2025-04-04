@@ -25,6 +25,8 @@ I realized that graphql was used. I also got a Bearer tokken because I logged in
 # Consistence level of applicants (performance)
 - If you are entering the website I have developed for the first time, you will see the loading text. 
 ![doc-4](assets/doc-4.png)
+- You can reset the store by pressing the Reset button. But of course this feature makes no sense for an application that is live and being used by users. If it was a live application with users, I would set a TTL (time to live) and reset the data.
+![doc-5](assets/doc-5.png)
 
 ### Why is it so important? and how did I control it?
 Because the candidate data retrieved from the API is not critical to maintain in a fully consistent state, the UI prioritizes speed over perfect accuracy. By immediately displaying cached or partially loaded data, users experience faster page loads without having to wait for a spinner. This approach enhances the perception of a high-performance application, even if some entries are temporarily outdated or incomplete.
