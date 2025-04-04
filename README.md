@@ -1,54 +1,89 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Univenn Frontend Developer Challenge
 
-Currently, two official plugins are available:
+Hello, I will talk about the details of their project in this case study I have completed for Univenn. So, first of all, in this document you will learn about: 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- How can I request for this api adress: https://staging-dashboard.hrpanda.co
+- Consistence level of applicants (performance optimization)
+- Responsive design
+- Components
+- Developer experince
+- Folder structure
 
-## Expanding the ESLint configuration
+# API request
+So, I first tried to make a request with basic authentication with email and password. I got 200 OK messages but I only saw the page content in the response.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- I analyzed what happens in the network when logged in as in figure 1.0.
+![doc-1](assets/doc-1.png)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+I realized that graphql was used. I also got a Bearer tokken because I logged in at the same time.
+![doc-2](assets/doc-2.png)
+
+- I also analyzed the request that had the data that matched the data in the list in the dashboard among the many graphql requests. And I generated types of response for using with redux toolkit, redux persist.
+![doc-3](assets/doc-3.png)
+
+# Consistence level of applicants (performance)
+- If you are entering the website I have developed for the first time, you will see the loading text. 
+![doc-4](assets/doc-4.png)
+
+### Why is it so important? and how did I control it?
+Because the candidate data retrieved from the API is not critical to maintain in a fully consistent state, the UI prioritizes speed over perfect accuracy. By immediately displaying cached or partially loaded data, users experience faster page loads without having to wait for a spinner. This approach enhances the perception of a high-performance application, even if some entries are temporarily outdated or incomplete.
+
+
+
+
+# HR Panda API Client
+
+A TypeScript implementation for interacting with the HR Panda GraphQL API, specifically for managing applicant data.
+
+### GraphQL Queries
+
+#### Get Company Applicant List
+
+```graphql
+query GetCompanyApplicantList($where: ApplicantWhereInput, $orderBy: [ApplicantOrderByWithRelationInput!], $cursor: ApplicantWhereUniqueInput, $take: Int, $skip: Int, $distinct: [ApplicantScalarFieldEnum!]) {
+  applicants(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    # Applicant fields
+  }
+}
+
+import { useApplicants } from './api/applicant';
+
+const { data, loading, error } = useApplicants({
+  where: { /* filter conditions */ },
+  orderBy: { /* sorting */ },
+  take: 10, // limit
+  skip: 0,  // offset
+});
 ```
+## Custom Components without shadcn/ui
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| ai-input | components/ui/ai-input-with-loading |
+| use-auto-resize-textarea | components/ui/use-auto-resize-textarea |
+| mobile-controller | components/ui/mobile-controller -> for responsive design |
+| pdf-viewer | components/ui/pdf-viewer -> right side sheet component for opening resumes |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Core Dependencies
+- **React 19**: The foundation for building reactive, component-based UIs.
+- Vite: Blazing-fast build tool for instant HMR and optimized production bundles.
+- Redux Toolkit + React-Redux: State management for centralized and predictable data flow.
+- React Router v7: Client-side navigation and dynamic routing.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Integrations  
+- **GraphQL API**: Real-time data fetching via Apollo Client.  
+- **Debounced Hooks**: Optimized search/input handling with `use-debounce`.  
+- **Radix + Tailwind**: Seamless theming and accessibility compliance.  
+
+### UI & Styling
+- **Tailwind CSS + Merge/Animate**: Utility-first CSS with dynamic class composition and animations.
+- **Radix UI**: Unstyled, accessible primitives (dropdowns, dialogs, etc.) for custom designs.
+- **TanStack Table v8**: Headless table library for performant data grids.
+- **Lucide React**: Lightweight icon set for intuitive UI elements.
+
+### Developer Experience
+- **TypeScript**: Static typing for safer code.
+- **ESLint**: Code quality enforcement with React-specific rules.
+- **Redux Persist**: Session persistence for state hydration across page reloads.
+
